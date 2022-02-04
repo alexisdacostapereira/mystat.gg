@@ -1,0 +1,581 @@
+---
+openapi: 3.0.2
+info:
+  title: API V1
+  version: v1
+paths:
+  "/actualities":
+    get:
+      summary: Get All Actualities
+      tags:
+      - Actualities
+      description: Get all Prefered Actualities
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                game: League of Legends
+                title: 'LCS : Cloud9 battue par l''équipe académique de FlyQuest'
+                link: https://www.team-aaa.com/fr/actualite/lcs-cloud9-battue-par-lequipe-academique-de-flyquest_121233
+                description: Le nouveau cinq de départ de FlyQuest a fait sensation
+                  la nuit dernière en s'imposant contre les champions en titre de
+                  la ligue nord-américaine, Cloud9, lors de la 6e semaine des LCS
+                  Summer Split
+                date: 10-07-2021 11:31:00
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+    put:
+      summary: Change Preferences
+      tags:
+      - Actualities
+      description: Put Parameter you want, all / only modified if you want, but respect
+        variables names !
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+        '400':
+          description: Bad Request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                lolActu:
+                  type: boolean
+                valorantActu:
+                  type: boolean
+                rocketLeagueActu:
+                  type: boolean
+                csGoActu:
+                  type: boolean
+                apexActu:
+                  type: boolean
+                callOfDutyActu:
+                  type: boolean
+                diablo2Actu:
+                  type: boolean
+                dota2Actu:
+                  type: boolean
+                dbzActu:
+                  type: boolean
+                fortniteActu:
+                  type: boolean
+                legendsOfRuneterraActu:
+                  type: boolean
+                marioKartActu:
+                  type: boolean
+                overwatchActu:
+                  type: boolean
+                pubgActu:
+                  type: boolean
+                rainbowSixActu:
+                  type: boolean
+                smashBrosUltimateActu:
+                  type: boolean
+                streetFighterVActu:
+                  type: boolean
+                starcraft2Actu:
+                  type: boolean
+                teamfightTacticsActu:
+                  type: boolean
+                tekken7Actu:
+                  type: boolean
+                trackmaniaActu:
+                  type: boolean
+                warcraft3Actu:
+                  type: boolean
+                wowActu:
+                  type: boolean
+  "/actualities/page=":
+    get:
+      summary: Get All Actualities with Pagination
+      tags:
+      - Actualities
+      description: Get all Prefered Actualities with pagination, render 5 * Page selected
+      parameters:
+      - name: page
+        in: parameter
+        required: true
+        schema:
+          type: number
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                game: League of Legends
+                title: 'LCS : Cloud9 battue par l''équipe académique de FlyQuest'
+                link: https://www.team-aaa.com/fr/actualite/lcs-cloud9-battue-par-lequipe-academique-de-flyquest_121233
+                description: Le nouveau cinq de départ de FlyQuest a fait sensation
+                  la nuit dernière en s'imposant contre les champions en titre de
+                  la ligue nord-américaine, Cloud9, lors de la 6e semaine des LCS
+                  Summer Split
+                date: 10-07-2021 11:31:00
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+  "/actualities/get_preferences":
+    get:
+      summary: Get All Preferences for Each Games
+      tags:
+      - Actualities
+      description: Get all Preferences, return true or false for each games, if never
+        preference selected before, return all games with false value
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                lolActu: 'false'
+                valorantActu: 'false'
+                rocketLeagueActu: 'false'
+                csGoActu: 'false'
+                apexActu: 'false'
+                callOfDutyActu: 'false'
+                diablo2Actu: 'false'
+                dota2Actu: 'false'
+                dbzActu: 'false'
+                fortniteActu: 'false'
+                legendsOfRuneterraActu: 'false'
+                marioKartActu: 'false'
+                overwatchActu: 'false'
+                pubgActu: 'false'
+                rainbowSixActu: 'false'
+                smashBrosUltimateActu: 'false'
+                streetFighterVActu: 'false'
+                starcraft2Actu: 'false'
+                teamfightTacticsActu: 'false'
+                tekken7Actu: 'false'
+                trackmaniaActu: 'false'
+                warcraft3Actu: 'false'
+                wowActu: 'false'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+  "/games":
+    get:
+      summary: Return all games
+      tags:
+      - Games
+      description: Get all scraped Games From Instant Gaming
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+              - name: 'Monster Hunter Stories 2: Wings of Ruin Deluxe Edition'
+                price: '46.79'
+                link: https://www.instant-gaming.com/fr/8888-acheter-jeu-steam-monster-hunter-stories-2-wings-of-ruin-deluxe-edition/
+                imglink: https://s3.gaming-cdn.com/images/products/8888/271x377/monster-hunter-stories-2-wings-of-ruin-deluxe-edition-cover.jpg
+                promo: "-34%"
+              - name: Chivalry 2
+                price: '22.49'
+                link: https://www.instant-gaming.com/fr/6076-acheter-jeu-epic-games-chivalry-2/
+                imglink: https://s2.gaming-cdn.com/images/products/6076/271x377/chivalry-2-cover.jpg
+                promo: "-38%"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+    post:
+      summary: get specific games
+      tags:
+      - Games
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      description: Return games from specifics Arguments
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+              - name: 'Monster Hunter Stories 2: Wings of Ruin Deluxe Edition'
+                price: '46.79'
+                link: https://www.instant-gaming.com/fr/8888-acheter-jeu-steam-monster-hunter-stories-2-wings-of-ruin-deluxe-edition/
+                imglink: https://s3.gaming-cdn.com/images/products/8888/271x377/monster-hunter-stories-2-wings-of-ruin-deluxe-edition-cover.jpg
+                promo: "-34%"
+              - name: Chivalry 2
+                price: '22.49'
+                link: https://www.instant-gaming.com/fr/6076-acheter-jeu-epic-games-chivalry-2/
+                imglink: https://s2.gaming-cdn.com/images/products/6076/271x377/chivalry-2-cover.jpg
+                promo: "-38%"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                max_price:
+                  type: integer
+                min_price:
+                  type: integer
+              required:
+              - email
+              - password
+  "/games/page=":
+    get:
+      summary: Return all games with pagination
+      tags:
+      - Games
+      description: Get all scraped Games with pagination From Instant Gaming
+      parameters:
+      - name: page
+        in: parameter
+        required: true
+        schema:
+          type: number
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+              - name: 'Monster Hunter Stories 2: Wings of Ruin Deluxe Edition'
+                price: '46.79'
+                link: https://www.instant-gaming.com/fr/8888-acheter-jeu-steam-monster-hunter-stories-2-wings-of-ruin-deluxe-edition/
+                imglink: https://s3.gaming-cdn.com/images/products/8888/271x377/monster-hunter-stories-2-wings-of-ruin-deluxe-edition-cover.jpg
+                promo: "-34%"
+              - name: Chivalry 2
+                price: '22.49'
+                link: https://www.instant-gaming.com/fr/6076-acheter-jeu-epic-games-chivalry-2/
+                imglink: https://s2.gaming-cdn.com/images/products/6076/271x377/chivalry-2-cover.jpg
+                promo: "-38%"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+    post:
+      summary: get specific games with page
+      tags:
+      - Games
+      parameters:
+      - name: page
+        in: parameter
+        required: true
+        schema:
+          type: number
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      description: Return games from specifics Arguments
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+              - name: 'Monster Hunter Stories 2: Wings of Ruin Deluxe Edition'
+                price: '46.79'
+                link: https://www.instant-gaming.com/fr/8888-acheter-jeu-steam-monster-hunter-stories-2-wings-of-ruin-deluxe-edition/
+                imglink: https://s3.gaming-cdn.com/images/products/8888/271x377/monster-hunter-stories-2-wings-of-ruin-deluxe-edition-cover.jpg
+                promo: "-34%"
+              - name: Chivalry 2
+                price: '22.49'
+                link: https://www.instant-gaming.com/fr/6076-acheter-jeu-epic-games-chivalry-2/
+                imglink: https://s2.gaming-cdn.com/images/products/6076/271x377/chivalry-2-cover.jpg
+                promo: "-38%"
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                max_price:
+                  type: integer
+                min_price:
+                  type: integer
+              required:
+              - email
+              - password
+  "/stats/lol":
+    get:
+      summary: get Stats for Lol Player
+      tags:
+      - Stats
+      description: Get Stats For League Of Legends Player
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              example:
+              - success:
+                  pseudo: Faker
+                  rank: Gold 2
+                  LP: 28 LP
+                  total_win: '12'
+                  total_lose: '17'
+                  total_games: 29
+                  ratio_win_lose: 41%
+                  avg_kill: '10.3'
+                  avg_death: '8.9'
+                  avg_assist: '18.8'
+                  avg_kill_contribution: "(62%)"
+                  top_champions:
+                  - name: Fiddlesticks
+                    cs: 143.2 (4.8)
+                    kda: 2.31:1
+                    kills: '6.2'
+                    deaths: '6.9'
+                    assits: '9.7'
+                    win_ratio: 47%
+                    nb_game: 15 Played
+                  - name: Viego
+                    cs: 150.9 (5.4)
+                    kda: 2.00:1
+                    kills: '5.9'
+                    deaths: '5.9'
+                    assits: '5.9'
+                    win_ratio: 50%
+                    nb_game: 8 Played
+                  last_games:
+                  - type: ARAM
+                    date: '2021-06-30 08:59:05'
+                    result: Victory
+                    time: 22m 2s
+                    champion: Caitlyn
+                    kill: '13'
+                    death: '11'
+                    assist: '32'
+                    kda: '4.09:1 '
+                    level: '18'
+                    cs: '55 (2.5) '
+                  - type: ARAM
+                    date: '2021-06-25 10:35:53'
+                    result: Victory
+                    time: 20m 51s
+                    champion: Shyvana
+                    kill: '12'
+                    death: '9'
+                    assist: '23'
+                    kda: '3.89:1 '
+                    level: '18'
+                    cs: '42 (2) '
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                server:
+                  type: string
+                pseudo:
+                  type: string
+              required:
+              - email
+              - password
+  "/user/sign_up":
+    post:
+      summary: Create a new User
+      tags:
+      - Users
+      description: Register Route
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                success: swr5ymxs92XzoXN8ohBG
+                pseudo: PewPew
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: User Already Exist.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pseudo:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - pseudo
+              - email
+              - password
+  "/user/sign_in":
+    post:
+      summary: Log an Existing User
+      tags:
+      - Users
+      description: Login route
+      parameters: []
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                success: swr5ymxs92XzoXN8ohBG
+                pseudo: PewPew
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Email or Password Incorrect.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+              required:
+              - email
+              - password
+  "/user/update_password":
+    delete:
+      summary: Update a User Password
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - Users
+      description: Update a User Password
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                success: Password Changed !
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Arguments.
+  "/user/disconnect":
+    delete:
+      summary: Delete a user Session
+      parameters:
+      - name: API
+        in: header
+        required: true
+        schema:
+          type: string
+      tags:
+      - Users
+      description: Delete a User Session / Token
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              example:
+                success: User Disconnected
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              example:
+                error: Invalid Token.
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:8080
